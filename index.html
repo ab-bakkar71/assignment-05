@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assignment-05 | Github Issue Tracker main | Login</title>
+    <link rel="stylesheet" href="style.css">
 
     <!-- tailwind & daisyui -->
      <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -17,13 +18,51 @@
 
     <!-- font awesome -->
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+     
 </head>
 <body>
-    
+    <div class="flex justify-center h-screen overflow-hidden">
+    <div class="w-[90%] lg:w-full p-6 m-auto bg-white rounded-md shadow-md lg:max-w-lg">
+        <div class="flex justify-center mb-6"><i class="text-8xl text-center fa-brands fa-github"></i></div>
+        <h1 class="text-2xl font-semibold text-center text-[#1F2937]">GitHub Issues Tracker</h1>
+        <p class="text-[16px] text-center text-[#64748B]">Sign in to manage your issues</p>
+        <form class="space-y-4">
+            <div>
+                <label class="label">
+                    <span class="text-base label-text">Username</span>
+                </label>
+                <input id="input-username" type="text" placeholder="Enter Username" class="w-full input input-bordered" />
+            </div>
+            <div>
+                <label class="label">
+                    <span class="text-base label-text">Password</span>
+                </label>
+                <input id="input-password" type="password" placeholder="Enter Password" class="w-full input input-bordered" />
+            </div>
+            <div>
+                <button type="button" id="input-btn" class="btn btn-primary w-full">Sign In</button>
+            </div>
+        </form>
+        <!-- addition text -->
+        <div>
+            <div class="flex items-center w-full my-6">
+                <hr class="flex-grow border-gray-300">
+                <span class="px-3 text-gray-400 text-sm font-medium">OR</span>
+                <hr class="flex-grow border-gray-300">
+            </div>
+            <p class="text-center text-[14px] text-[#64748B]" >Demo Credentials:</p>
+            <div class="bg-[#F8FAFC] py-6 text-center rounded-md mt-2.5">
+                Username: admin <br>
+                Password: admin123
+            </div>
+        </div>
+    </div>
+</div>
 
 
 
     <!-- Js -->
-     <script src="./js/login.js"></script>
+     <script src="js/login.js"></script>
 </body>
 </html>
