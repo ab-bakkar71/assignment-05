@@ -37,8 +37,8 @@ const issuesDisplay = (issues) => {
            ${issue.description}
           </p>
           <div>
-            <p class="badge badge-outline badge-error font-medium text-[#EF4444] bg-[#FEECEC]"> Bug</p>
-            <p class="badge badge-outline badge-warning font-medium text-[#D97706] bg-[#FDE68A]"> Warning</p>
+            <p class="badge badge-outline badge-error font-medium text-[#EF4444] bg-[#FEECEC]"> ${issue.labels[0]}</p>
+            <p class="badge badge-outline badge-warning font-medium text-[#D97706] bg-[#FDE68A]"> ${issue.labels[1]}</p>
           </div>
           <hr class="w-full block border-[#E4E4E7] my-4">
           <div class="space-y-2.5 text-[#64748B]">
@@ -54,4 +54,28 @@ const issuesDisplay = (issues) => {
         issuesContainer.append(issueCard);
     }
 }
+
+// toggle btn function
+let  currentTab = 'all';
+const tabActive = ["bg-[#4A00FF]", "border-none","text-white" ];
+const tabInActive = ["bg-transparent", "border-[#E4E4E7]", "text-[#64748B" ]
+
+function switchTab(tab){
+  const tabs = ["all", "open", "closed"];
+
+  for(const t of tabs){
+    const tabName = document.getElementById("tab-"+ t);
+    if(t === tab){
+     
+      tabName.classList.remove(...tabInActive);
+      tabName.classList.add(...tabActive);
+    }
+    else{
+      tabName.classList.remove(...tabActive);
+      tabName.classList.add(...tabInActive)
+    }
+  }
+
+}
+switchTab(currentTab);
 AllIssues()
