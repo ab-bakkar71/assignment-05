@@ -1,5 +1,6 @@
 // get The element
-document.getElementById('input-btn').addEventListener('click', function(){
+document.getElementById('input-btn').addEventListener('click', function(even){
+    even.preventDefault();
     // get the input value
     const inputUserName = document.getElementById('input-username');
     const userName = inputUserName.value;
