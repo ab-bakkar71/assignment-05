@@ -205,7 +205,7 @@ switchTab(currentTab);
 AllIssues();
 // search function
 document.getElementById("btn-search").addEventListener("click", () => {
-  const searchInput = document.getElementById("input-search").value.trim();
+  const searchInput = document.getElementById("input-search").value.trim().toLowerCase();
 
   if(searchInput === ""){
     AllIssues();
