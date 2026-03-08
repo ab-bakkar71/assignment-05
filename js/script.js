@@ -185,7 +185,7 @@ function switchTab(tab) {
   setTimeout(() => {
     displayIssues();
     manageSpinner(false);
-  }, 300);
+  });
 }
 
 // manage spinner
@@ -203,16 +203,23 @@ const manageSpinner = (status)=>{
 
 switchTab(currentTab);
 AllIssues();
-
+// search function
 document.getElementById("btn-search").addEventListener("click", () => {
-  const searchInput = document.getElementById("input-search").value.trim().toLowerCase();
+  const searchInput = document.getElementById("input-search").value.trim();
+
+  if(searchInput === ""){
+    AllIssues();
+    return;
+  }
   
   manageSpinner(true);
   fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInput}`)
     .then((res) => res.json())
     .then((data) => {
       issues = data.data;
+      currentTab = "all";
       displayIssues();
       manageSpinner(false);
+      
     });
 });
