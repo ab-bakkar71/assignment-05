@@ -31,7 +31,7 @@
       referrerpolicy="no-referrer"
     />
   </head>
-  <body class="bg-[#F8FAFC] h-full">
+  <body class="bg-[#F8FAFC] h-screen">
     <!-- Nav bar -->
     <nav class="bg-base-100 shadow-sm">
       <div class="navbar w-11/12 mx-auto">
@@ -42,11 +42,25 @@
           >
         </div>
         <div class="flex gap-2">
-          <input
-            type="text"
-            placeholder="Search"
-            class="input input-bordered w-24 md:w-auto"
-          />
+          <label class="input">
+            <svg
+              class="h-[1em] opacity-50"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+            >
+              <g
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                stroke-width="2.5"
+                fill="none"
+                stroke="currentColor"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.3-4.3"></path>
+              </g>
+            </svg>
+            <input id="input-search" type="search" required placeholder="Search" />
+          </label>
           <button id="btn-search" class="btn btn-primary join-item">
             <i class="fa-solid fa-plus"></i> New Issue
           </button>
@@ -56,7 +70,7 @@
 
     <!-- toggle btn -->
     <section
-      class="max-w-9/12 mx-auto mt-[60px] py-6 bg-base-100 shadow pl-6 rounded-md"
+      class="w-[90%] md:max-w-9/12 mx-auto mt-[60px] py-6 bg-base-100 shadow pl-6 rounded-md"
     >
       <button
         onclick="switchTab('all')"
@@ -83,7 +97,7 @@
 
     <!-- Issues count  -->
     <section
-      class="flex justify-between items-center max-w-9/12 mx-auto mt-[60px] py-4 bg-base-100 shadow px-6 rounded-t-md"
+      class="flex justify-between items-center w-[90%] md:max-w-9/12 mx-auto mt-[60px] py-4 bg-base-100 shadow px-6 rounded-t-md"
     >
       <div class="flex items-center gap-2">
         <div class="bg-[#ECE4FF] rounded-full p-2">
@@ -111,18 +125,21 @@
 
     <!-- card section -->
 
+    <!-- spinner -->
+     <section id="spinner" class="flex justify-center items-center hidden">
+      <span class="loading loading-bars loading-xl"></span>
+     </section>
+
     <section
       id="issues-container"
-      class="max-w-9/12 mx-auto p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 shadow-sm"
+      class="w-[90%] md:max-w-9/12 mx-auto p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 shadow-sm"
     ></section>
 
     <!-- Open the modal using ID.showModal() method -->
 
     <dialog id="modal_details" class="modal">
       <div class="modal-box">
-        <div id="details-container">
-          
-        </div>
+        <div id="details-container"></div>
         <div class="modal-action">
           <form method="dialog">
             <!-- if there is a button in form, it will close the modal -->

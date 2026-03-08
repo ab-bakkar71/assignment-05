@@ -5,16 +5,19 @@ const tabInActive = ["bg-transparent", "border-[#E4E4E7]", "text-[#64748B"];
 
 // All card Api
 const AllIssues = () => {
+  manageSpinner(true);
   fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues")
     .then((res) => res.json())
     .then((data) => {
       issues = data.data;
       displayIssues();
+      manageSpinner(false);
     });
 };
 
 // issues details modal
 const issuesDetail = async (id) => {
+  
   const detailUrl = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
   const res = await fetch(detailUrl);
   const details = await res.json();
@@ -53,12 +56,12 @@ const changeBg =
               <p
                 class="badge badge-outline badge-error font-medium text-[#EF4444] bg-[#FEECEC]"
               >
-                ${issue.labels[0]}
+                ${issue.labels[0] || "Not Found"}
               </p>
               <p
                 class="badge badge-outline badge-warning font-medium text-[#D97706] bg-[#FDE68A]"
               >
-               ${issue.labels[1]}
+               ${issue.labels[1] || "Not Found"}
               </p>
             </div>
             <p class="text-[#64748B] my-6">
@@ -133,7 +136,7 @@ const issuesDisplay = (issues) => {
 
     // all card Show
     issueCard.innerHTML = `
-        <div class="card bg-base-100 w-full shadow-sm cursor-pointer ${borderClass}">
+        <div class="card bg-base-100 w-full h-full shadow-sm cursor-pointer ${borderClass}">
         <div class="card-body">
           <div class="flex justify-between items-center">
             ${changeIcon}
@@ -144,8 +147,8 @@ const issuesDisplay = (issues) => {
            ${issue.description}
           </p>
           <div>
-            <p class="badge badge-outline badge-error font-medium text-[#EF4444] bg-[#FEECEC]"> ${issue.labels[0]}</p>
-            <p class="badge badge-outline badge-warning font-medium text-[#D97706] bg-[#FDE68A]"> ${issue.labels[1]}</p>
+            <p class="badge badge-outline badge-error font-medium text-[#EF4444] bg-[#FEECEC]"> ${issue.labels[0] || "Not Found"}</p>
+            <p class="badge badge-outline badge-warning font-medium text-[#D97706] bg-[#FDE68A]"> ${issue.labels[1] || "Not Found"}</p>
           </div>
           <hr class="w-full block border-[#E4E4E7] my-4">
           <div class="space-y-2.5 text-[#64748B]">
@@ -178,8 +181,38 @@ function switchTab(tab) {
   }
 
   // Display filtered issues
-  displayIssues();
+  manageSpinner(true);
+  setTimeout(() => {
+    displayIssues();
+    manageSpinner(false);
+  }, 300);
 }
+
+// manage spinner
+const manageSpinner = (status)=>{
+  if(status==true){
+    document.getElementById('spinner').classList.remove('hidden');
+    document.getElementById('issues-container').classList.add('hidden');
+  }
+  else{
+    document.getElementById('spinner').classList.add('hidden');
+    document.getElementById('issues-container').classList.remove('hidden');
+  }
+}
+
 
 switchTab(currentTab);
 AllIssues();
+
+document.getElementById("btn-search").addEventListener("click", () => {
+  const searchInput = document.getElementById("input-search").value.trim().toLowerCase();
+  
+  manageSpinner(true);
+  fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchInput}`)
+    .then((res) => res.json())
+    .then((data) => {
+      issues = data.data;
+      displayIssues();
+      manageSpinner(false);
+    });
+});
